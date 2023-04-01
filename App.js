@@ -15,7 +15,7 @@ export default function App() {
   }
 
   let renderScreen = pickerNumber 
-                    ? <GameScreen />
+                    ? <GameScreen pickerNumber={pickerNumber}/>
                     : <StartGameScreen onPickNumber={pickerNumberHandler}/>;
 
 
