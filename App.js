@@ -4,6 +4,7 @@ import StartGameScreen from "./src/screens/StartGameScreen";
 import BackGroundImage from "./assets/images/backGround.png";
 import { useState } from "react";
 import GameScreen from "./src/screens/GameScreen";
+import Colors from "./src/constants/colors";
 
 export default function App() {
   console.log('Started Project');
@@ -19,7 +20,7 @@ export default function App() {
 
 
   return (
-    <LinearGradient colors={['#4e0329', '#ddb52f']} style={styles.rootContainer}>
+    <LinearGradient colors={[Colors.primary700, Colors.accent500]} style={styles.rootContainer}>
       <ImageBackground 
       source={BackGroundImage}
       resizeMode="cover"
