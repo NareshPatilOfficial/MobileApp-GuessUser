@@ -1,10 +1,11 @@
-import { Text, StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import { useEffect, useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import Card from "../components/Card";
 import InstructionText from "../components/InstructionText";
+import {Ionicons} from "@expo/vector-icons"
 
 
 function generateRandomNumber(min, max, excludeNumber){
@@ -63,10 +64,14 @@ function GameScreen(props) {
                 <InstructionText style={styles.instructionText}>High or Lower?</InstructionText>
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={guessNumberHanlder.bind(this, 'lower')}>-</PrimaryButton>
+                        <PrimaryButton onPress={guessNumberHanlder.bind(this, 'lower')}>
+                            <Ionicons name={'md-remove'} size={20}/>
+                        </PrimaryButton>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={guessNumberHanlder.bind(this, 'higher')}>+</PrimaryButton>
+                        <PrimaryButton onPress={guessNumberHanlder.bind(this, 'higher')}>
+                            <Ionicons name={'md-add'} size={20}/>
+                        </PrimaryButton>
                     </View>
                 </View>
             </Card>
