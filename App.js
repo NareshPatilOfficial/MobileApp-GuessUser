@@ -15,6 +15,7 @@ export default function App() {
   console.log('Started Project');
   const [pickerNumber, setPickedNumber] = useState(0);
   const [isGameOver, setGameOverValue] = useState(true);
+  const [guessRoundsNumber, setGuessRoundNumber] = useState(0);
 
   const [fontLoaded] = useFonts({
     'open-sans':OpenSans,
@@ -32,17 +33,28 @@ export default function App() {
 
   const gameOverHandler = () => {
     setGameOverValue(true);
+   }
+
+  const startNewGameHandler = () => {
+    setGuessRoundNumber(0);
+    setPickedNumber(0);
   }
 
   let renderScreen = pickerNumber 
                     ? <GameScreen 
                         pickerNumber={pickerNumber}
                         onGameOver={gameOverHandler}
+                        onSetGuessRoundNumber={setGuessRoundNumber}
+                        guessRoundsNumber={guessRoundsNumber}
                       />
                     : <StartGameScreen onPickNumber={pickerNumberHandler}/>;
 
   if(isGameOver && pickerNumber){
-    renderScreen = <GameOverScreen />
+    renderScreen = <GameOverScreen
+                      pickedNumber={pickerNumber}
+                      roundsNumber={guessRoundsNumber}
+                      onStartNewGame={startNewGameHandler}
+                   />
   }
   
   return (

@@ -31,6 +31,11 @@ function GameScreen(props) {
         }
     }, [props.pickerNumber, guessedNumber, props.onGameOver])
 
+    useEffect(() => {
+        minNumber=0;
+        maxNumber=100;
+    }, [])
+
     const guessNumberHanlder = (direction) => {
 
         if(
@@ -54,6 +59,7 @@ function GameScreen(props) {
         console.log(direction, minNumber, maxNumber);
         let randomNum = generateRandomNumber(minNumber, maxNumber, guessedNumber);
         setGuessedNumber(randomNum);
+        props.onSetGuessRoundNumber((previousRoundNumber) => ++previousRoundNumber);
     }
 
     return (
