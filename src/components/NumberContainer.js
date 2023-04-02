@@ -15,9 +15,11 @@ const styles = StyleSheet.create({
     numberContainer:{
         borderWidth: 4,
         borderColor:Colors.accent500,
+        marginHorizontal:40,
         marginVertical:20,
         borderRadius:8,
-        paddingVertical:5
+        paddingVertical:20,
+        alignItems:'center'
     },
     numberText:{
         color: Colors.accent500,
