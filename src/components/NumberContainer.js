@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     numberText:{
+        fontFamily:'open-sans-bold',
         color: Colors.accent500,
         fontSize:30,
-        fontWeight:'bold',
         textAlign:'center',
     }
 })

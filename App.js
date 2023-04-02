@@ -6,11 +6,24 @@ import { useState } from "react";
 import GameScreen from "./src/screens/GameScreen";
 import Colors from "./src/constants/colors";
 import GameOverScreen from "./src/screens/GameOverScreen";
+import {useFonts} from 'expo-font';
+import OpenSans from './assets/fonts/OpenSans-Regular.ttf';
+import OpenSansBold from './assets/fonts/OpenSans-Bold.ttf';
+import AppLoading from "expo-app-loading";
 
 export default function App() {
   console.log('Started Project');
   const [pickerNumber, setPickedNumber] = useState(0);
   const [isGameOver, setGameOverValue] = useState(true);
+
+  const [fontLoaded] = useFonts({
+    'open-sans':OpenSans,
+    'open-sans-bold':OpenSansBold
+  });
+
+  if(!fontLoaded){
+    return <AppLoading />
+  }
 
   function pickerNumberHandler(number){
     setPickedNumber(number);
