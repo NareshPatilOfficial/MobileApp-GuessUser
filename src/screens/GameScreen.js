@@ -11,7 +11,7 @@ import RoundItem from "../components/RoundItem";
 
 
 function generateRandomNumber(min, max, excludeNumber){
-    const randNumber = Math.floor(Math.random() * (max - min) + min);
+    const randNumber = Math.floor(Math.random() * (max - min)) + min;
 
     if(randNumber === excludeNumber){
         return generateRandomNumber(min, max, excludeNumber);
@@ -26,7 +26,7 @@ let maxNumber=100;
 function GameScreen(props) {
     const intialGuessNumber = generateRandomNumber(minNumber, maxNumber, props.pickerNumber);
     const [guessedNumber, setGuessedNumber] = useState(intialGuessNumber);
-    const [guessedNumberList, setGuessedNumberList ] = useState([]);
+    const [guessedNumberList, setGuessedNumberList ] = useState([11,22,33,44,55,66,77,88,99,1,2,3,4,5,6,7,8,9]);
     
     useEffect(() => {
         if(guessedNumber === props.pickerNumber){
@@ -56,7 +56,7 @@ function GameScreen(props) {
         if(direction === 'lower'){
             maxNumber = guessedNumber;
         }else {
-            minNumber = guessedNumber + 1;
+            minNumber = guessedNumber;
         }
         
         console.log(direction, minNumber, maxNumber);
@@ -90,6 +90,7 @@ function GameScreen(props) {
                 <FlatList 
                     data={guessedNumberList}
                     renderItem={({item, index}) => <RoundItem guessedNumber={item} index={index}/>}
+                    keyExtractor={item => item}
                 />
             </View>
         </View>
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
         marginBottom:8
     },
     listContainer:{
-       marginTop:20 
+        marginTop:20,
+        height: '52%'
     }
 })

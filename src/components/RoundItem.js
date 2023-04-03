@@ -5,7 +5,7 @@ function RoundItem({index, guessedNumber}){
     return (
         <View style={style.rootContainer}>
             <Text style={style.text}>#{index}</Text>
-            <Text style={style.text}>you guessed {guessedNumber}</Text>
+            <Text style={style.text}>Opponent's Guess: {guessedNumber}</Text>
         </View>
     )
 }
@@ -14,17 +14,19 @@ export default RoundItem;
 
 const style = StyleSheet.create({
     rootContainer:{
-        backgroundColor:Colors.primary500,
-        textAlign:'center',
+        backgroundColor:Colors.accent500,
         flexDirection:'row',
         paddingVertical:10,
         paddingHorizontal:10,
-        marginTop:50,
+        marginTop:20,
         justifyContent:'space-between',
-        borderRadius:20
+        borderRadius:25,
+        borderColor:Colors.primary500,
+        borderWidth:2,
+        // width:'100%'
     },
     text:{
-        fontSize:16,
-        color:'white'
+        fontFamily:'open-sans',
+        fontSize:16
     }
 })
