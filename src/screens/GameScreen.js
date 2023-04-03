@@ -26,8 +26,9 @@ let maxNumber=100;
 function GameScreen(props) {
     const intialGuessNumber = generateRandomNumber(minNumber, maxNumber, props.pickerNumber);
     const [guessedNumber, setGuessedNumber] = useState(intialGuessNumber);
-    const [guessedNumberList, setGuessedNumberList ] = useState([11,22,33,44,55,66,77,88,99,1,2,3,4,5,6,7,8,9]);
-    
+    const [guessedNumberList, setGuessedNumberList ] = useState([]);
+    const guessedNumberListSize = guessedNumberList.length;
+
     useEffect(() => {
         if(guessedNumber === props.pickerNumber){
             props.onGameOver();
@@ -89,7 +90,7 @@ function GameScreen(props) {
             <View style={styles.listContainer}>
                 <FlatList 
                     data={guessedNumberList}
-                    renderItem={({item, index}) => <RoundItem guessedNumber={item} index={index}/>}
+                    renderItem={({item, index}) => <RoundItem guessedNumber={item} index={guessedNumberListSize-index}/>}
                     keyExtractor={item => item}
                 />
             </View>
@@ -101,6 +102,7 @@ export default GameScreen;
 
 const styles = StyleSheet.create({
     screen:{
+        flex:1,
         padding:30,
         marginTop:20
     },
@@ -115,7 +117,6 @@ const styles = StyleSheet.create({
         marginBottom:8
     },
     listContainer:{
-        marginTop:20,
-        height: '52%'
+        flex:1
     }
 })

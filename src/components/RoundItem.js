@@ -18,15 +18,15 @@ const style = StyleSheet.create({
         flexDirection:'row',
         paddingVertical:10,
         paddingHorizontal:10,
-        marginTop:20,
+        marginVertical:8,
         justifyContent:'space-between',
-        borderRadius:25,
+        borderRadius: 40,
         borderColor:Colors.primary500,
         borderWidth:2,
-        // width:'100%'
+        width:'100%',
+        elevation:4
     },
     text:{
-        fontFamily:'open-sans',
-        fontSize:16
+        fontFamily:'open-sans'
     }
 })
