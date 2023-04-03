@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, Text } from "react-native";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import { useEffect, useState } from "react";
@@ -6,6 +6,8 @@ import PrimaryButton from "../components/PrimaryButton";
 import Card from "../components/Card";
 import InstructionText from "../components/InstructionText";
 import {Ionicons} from "@expo/vector-icons"
+import { FlatList } from "react-native";
+import RoundItem from "../components/RoundItem";
 
 
 function generateRandomNumber(min, max, excludeNumber){
@@ -24,7 +26,8 @@ let maxNumber=100;
 function GameScreen(props) {
     const intialGuessNumber = generateRandomNumber(minNumber, maxNumber, props.pickerNumber);
     const [guessedNumber, setGuessedNumber] = useState(intialGuessNumber);
-
+    const [guessedNumberList, setGuessedNumberList ] = useState([]);
+    
     useEffect(() => {
         if(guessedNumber === props.pickerNumber){
             props.onGameOver();
@@ -53,12 +56,14 @@ function GameScreen(props) {
         if(direction === 'lower'){
             maxNumber = guessedNumber;
         }else {
-            minNumber = guessedNumber;
+            minNumber = guessedNumber + 1;
         }
         
         console.log(direction, minNumber, maxNumber);
         let randomNum = generateRandomNumber(minNumber, maxNumber, guessedNumber);
+        console.log('randomNum', randomNum);
         setGuessedNumber(randomNum);
+        setGuessedNumberList((previousData => [randomNum, ...previousData]));
         props.onSetGuessRoundNumber((previousRoundNumber) => ++previousRoundNumber);
     }
 
@@ -81,7 +86,11 @@ function GameScreen(props) {
                     </View>
                 </View>
             </Card>
-            <View>
+            <View style={styles.listContainer}>
+                <FlatList 
+                    data={guessedNumberList}
+                    renderItem={({item, index}) => <RoundItem guessedNumber={item} index={index}/>}
+                />
             </View>
         </View>
     )
@@ -103,5 +112,8 @@ const styles = StyleSheet.create({
     },
     instructionText:{
         marginBottom:8
+    },
+    listContainer:{
+       marginTop:20 
     }
 })
