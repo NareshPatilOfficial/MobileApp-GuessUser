@@ -12,7 +12,6 @@ import OpenSansBold from './assets/fonts/OpenSans-Bold.ttf';
 import AppLoading from "expo-app-loading";
 
 export default function App() {
-  console.log('Started Project');
   const [pickerNumber, setPickedNumber] = useState(0);
   const [isGameOver, setGameOverValue] = useState(true);
   const [guessRoundsNumber, setGuessRoundNumber] = useState(0);
@@ -31,8 +30,9 @@ export default function App() {
     setGameOverValue(false);
   }
 
-  const gameOverHandler = () => {
+  const gameOverHandler = (guessedNumber) => {
     setGameOverValue(true);
+    setGuessRoundNumber(guessedNumber);
    }
 
   const startNewGameHandler = () => {
@@ -44,8 +44,6 @@ export default function App() {
                     ? <GameScreen 
                         pickerNumber={pickerNumber}
                         onGameOver={gameOverHandler}
-                        onSetGuessRoundNumber={setGuessRoundNumber}
-                        guessRoundsNumber={guessRoundsNumber}
                       />
                     : <StartGameScreen onPickNumber={pickerNumberHandler}/>;
 

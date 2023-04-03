@@ -9,7 +9,6 @@ import {Ionicons} from "@expo/vector-icons"
 import { FlatList } from "react-native";
 import RoundItem from "../components/RoundItem";
 
-
 function generateRandomNumber(min, max, excludeNumber){
     const randNumber = Math.floor(Math.random() * (max - min)) + min;
 
@@ -30,8 +29,10 @@ function GameScreen(props) {
     const guessedNumberListSize = guessedNumberList.length;
 
     useEffect(() => {
+        console.log('guessedNumber',guessedNumber,'props.pickerNumber',props.pickerNumber);
         if(guessedNumber === props.pickerNumber){
-            props.onGameOver();
+            console.log('useEffectSuccess');
+            props.onGameOver(guessedNumberListSize);
         }
     }, [props.pickerNumber, guessedNumber, props.onGameOver])
 
@@ -59,13 +60,11 @@ function GameScreen(props) {
         }else {
             minNumber = guessedNumber;
         }
-        
+        console.log('clicked');
         console.log(direction, minNumber, maxNumber);
         let randomNum = generateRandomNumber(minNumber, maxNumber, guessedNumber);
-        console.log('randomNum', randomNum);
         setGuessedNumber(randomNum);
         setGuessedNumberList((previousData => [randomNum, ...previousData]));
-        props.onSetGuessRoundNumber((previousRoundNumber) => ++previousRoundNumber);
     }
 
     return (
