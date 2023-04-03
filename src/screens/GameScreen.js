@@ -9,10 +9,10 @@ import {Ionicons} from "@expo/vector-icons"
 import { FlatList } from "react-native";
 import RoundItem from "../components/RoundItem";
 
-function generateRandomNumber(min, max, excludeNumber){
+function generateRandomNumber(min, max, excludeNumber, guessedNumberList=[]){
     const randNumber = Math.floor(Math.random() * (max - min)) + min;
 
-    if(randNumber === excludeNumber){
+    if(randNumber === excludeNumber || guessedNumberList.includes(excludeNumber)){
         return generateRandomNumber(min, max, excludeNumber);
     }else{
         return randNumber;
@@ -23,15 +23,14 @@ let minNumber=0;
 let maxNumber=100;
 
 function GameScreen(props) {
+    console.log('GameScreenStarted');
     const intialGuessNumber = generateRandomNumber(minNumber, maxNumber, props.pickerNumber);
     const [guessedNumber, setGuessedNumber] = useState(intialGuessNumber);
-    const [guessedNumberList, setGuessedNumberList ] = useState([]);
+    const [guessedNumberList, setGuessedNumberList ] = useState([intialGuessNumber]);
     const guessedNumberListSize = guessedNumberList.length;
 
     useEffect(() => {
-        console.log('guessedNumber',guessedNumber,'props.pickerNumber',props.pickerNumber);
         if(guessedNumber === props.pickerNumber){
-            console.log('useEffectSuccess');
             props.onGameOver(guessedNumberListSize);
         }
     }, [props.pickerNumber, guessedNumber, props.onGameOver])
@@ -62,7 +61,7 @@ function GameScreen(props) {
         }
         console.log('clicked');
         console.log(direction, minNumber, maxNumber);
-        let randomNum = generateRandomNumber(minNumber, maxNumber, guessedNumber);
+        let randomNum = generateRandomNumber(minNumber, maxNumber, guessedNumber, guessedNumberList);
         setGuessedNumber(randomNum);
         setGuessedNumberList((previousData => [randomNum, ...previousData]));
     }
